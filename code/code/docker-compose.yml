@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  claims-reviewer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - DATASET_ROOT=/app/dataset
+    volumes:
+      - ../dataset:/app/dataset
+      - ./outputs:/app/outputs
+    command: ["--input", "/app/dataset/claims.csv", "--output", "/app/outputs/output.csv"]
